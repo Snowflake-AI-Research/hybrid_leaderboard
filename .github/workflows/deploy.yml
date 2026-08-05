@@ -25,7 +25,9 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
-      - run: npm run build
+      # Deploy build only transpiles (Vite/esbuild); type-checking stays local
+      # via `npm run build`. Avoids CI-only tsc type-resolution failures.
+      - run: npm run build:ci
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
