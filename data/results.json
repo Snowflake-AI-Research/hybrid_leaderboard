@@ -1,0 +1,207 @@
+{
+  "meta": {
+    "benchmark": "HybridDeepResearch",
+    "tagline": "Enforcing rigor across SQL and web search for enterprise agents",
+    "description": "A rigorous benchmark for enterprise deep-research agents that must fuse structured evidence from a governed SQL database with unstructured information from web search. Every task is built so that neither side alone can solve it. Systems are scored overall and across three cross-modal task families.",
+    "isSampleData": false,
+    "news": [
+      {
+        "date": "2026-06-02",
+        "title": "HybridDeepResearch benchmark released",
+        "body": "The first benchmark for enterprise hybrid deep research, combining SQL and web search, is now public.",
+        "link": "https://www.snowflake.com/en/blog/engineering/hybrid-deep-research-benchmark/"
+      }
+    ]
+  },
+  "boards": {
+    "main": {
+      "name": "HybridDeepResearch",
+      "primaryMetric": "overall",
+      "columns": ["overall", "sql2s", "s2sql", "parallel"],
+      "defaultSplit": "public",
+      "defaultMetric": "avg8"
+    }
+  },
+  "entries": [
+    {
+      "id": "smolagents-qwen35-4b",
+      "system": "smolagents",
+      "org": "Hugging Face",
+      "baseModel": "Qwen3.5-4B",
+      "agentType": "single-agent",
+      "date": "2026-06-02",
+      "logo": "/logos/smolagents.png",
+      "scores": {
+        "public": {
+          "pass8": { "overall": 36.05, "sql2s": 21.67, "s2sql": 12.07, "parallel": 72.27 },
+          "avg8": { "overall": 17.20, "sql2s": 8.19, "s2sql": 3.23, "parallel": 39.39 }
+        }
+      }
+    },
+    {
+      "id": "smolagents-qwen35-9b",
+      "system": "smolagents",
+      "org": "Hugging Face",
+      "baseModel": "Qwen3.5-9B",
+      "agentType": "single-agent",
+      "date": "2026-06-02",
+      "logo": "/logos/smolagents.png",
+      "scores": {
+        "public": {
+          "pass8": { "overall": 40.53, "sql2s": 21.18, "s2sql": 17.24, "parallel": 84.87 },
+          "avg8": { "overall": 20.59, "sql2s": 10.41, "s2sql": 4.53, "parallel": 45.80 }
+        }
+      }
+    },
+    {
+      "id": "smolagents-qwen35-27b",
+      "system": "smolagents",
+      "org": "Hugging Face",
+      "baseModel": "Qwen3.5-27B",
+      "agentType": "single-agent",
+      "date": "2026-06-02",
+      "logo": "/logos/smolagents.png",
+      "scores": {
+        "public": {
+          "pass8": { "overall": 52.89, "sql2s": 35.96, "s2sql": 39.66, "parallel": 88.24 },
+          "avg8": { "overall": 26.74, "sql2s": 15.15, "s2sql": 15.73, "parallel": 51.89 }
+        }
+      }
+    },
+    {
+      "id": "smolagents-qwen35-122b-a10b",
+      "system": "smolagents",
+      "org": "Hugging Face",
+      "baseModel": "Qwen3.5-122B-A10B",
+      "agentType": "single-agent",
+      "date": "2026-06-02",
+      "logo": "/logos/smolagents.png",
+      "scores": {
+        "public": {
+          "pass8": { "overall": 43.95, "sql2s": 30.54, "s2sql": 27.59, "parallel": 74.79 },
+          "avg8": { "overall": 20.23, "sql2s": 13.42, "s2sql": 9.05, "parallel": 37.29 }
+        }
+      }
+    },
+    {
+      "id": "smolagents-qwen35-397b-a17b",
+      "system": "smolagents",
+      "org": "Hugging Face",
+      "baseModel": "Qwen3.5-397B-A17B",
+      "agentType": "single-agent",
+      "date": "2026-06-02",
+      "logo": "/logos/smolagents.png",
+      "scores": {
+        "public": {
+          "pass8": { "overall": 56.58, "sql2s": 41.87, "s2sql": 51.72, "parallel": 84.03 },
+          "avg8": { "overall": 32.43, "sql2s": 19.52, "s2sql": 20.69, "parallel": 60.19 }
+        }
+      }
+    },
+    {
+      "id": "smolagents-glm-52-fp4",
+      "system": "smolagents",
+      "org": "Hugging Face",
+      "baseModel": "GLM-5.2-FP4",
+      "agentType": "single-agent",
+      "date": "2026-06-02",
+      "logo": "/logos/smolagents.png",
+      "scores": {
+        "public": {
+          "pass8": { "overall": 72.37, "sql2s": 68.97, "s2sql": 46.55, "parallel": 90.76 },
+          "avg8": { "overall": 43.52, "sql2s": 38.61, "s2sql": 13.15, "parallel": 66.70 }
+        }
+      }
+    },
+    {
+      "id": "miroflow-qwen35-4b",
+      "system": "MiroFlow",
+      "org": "MiroMind",
+      "baseModel": "Qwen3.5-4B",
+      "agentType": "multi-agent",
+      "date": "2026-06-02",
+      "logo": "/logos/miromind.png",
+      "scores": {
+        "public": {
+          "pass8": { "overall": 41.58, "sql2s": 29.56, "s2sql": 17.24, "parallel": 73.95 },
+          "avg8": { "overall": 15.79, "sql2s": 11.02, "s2sql": 2.37, "parallel": 30.46 }
+        }
+      }
+    },
+    {
+      "id": "miroflow-qwen35-9b",
+      "system": "MiroFlow",
+      "org": "MiroMind",
+      "baseModel": "Qwen3.5-9B",
+      "agentType": "multi-agent",
+      "date": "2026-06-02",
+      "logo": "/logos/miromind.png",
+      "scores": {
+        "public": {
+          "pass8": { "overall": 53.16, "sql2s": 41.38, "s2sql": 25.86, "parallel": 86.55 },
+          "avg8": { "overall": 22.34, "sql2s": 17.30, "s2sql": 4.96, "parallel": 39.39 }
+        }
+      }
+    },
+    {
+      "id": "miroflow-qwen35-27b",
+      "system": "MiroFlow",
+      "org": "MiroMind",
+      "baseModel": "Qwen3.5-27B",
+      "agentType": "multi-agent",
+      "date": "2026-06-02",
+      "logo": "/logos/miromind.png",
+      "scores": {
+        "public": {
+          "pass8": { "overall": 57.11, "sql2s": 48.77, "s2sql": 43.10, "parallel": 78.15 },
+          "avg8": { "overall": 23.75, "sql2s": 21.06, "s2sql": 17.24, "parallel": 31.51 }
+        }
+      }
+    },
+    {
+      "id": "miroflow-qwen35-122b-a10b",
+      "system": "MiroFlow",
+      "org": "MiroMind",
+      "baseModel": "Qwen3.5-122B-A10B",
+      "agentType": "multi-agent",
+      "date": "2026-06-02",
+      "logo": "/logos/miromind.png",
+      "scores": {
+        "public": {
+          "pass8": { "overall": 53.95, "sql2s": 46.80, "s2sql": 43.10, "parallel": 71.43 },
+          "avg8": { "overall": 24.93, "sql2s": 22.72, "s2sql": 18.53, "parallel": 31.83 }
+        }
+      }
+    },
+    {
+      "id": "miroflow-qwen35-397b-a17b",
+      "system": "MiroFlow",
+      "org": "MiroMind",
+      "baseModel": "Qwen3.5-397B-A17B",
+      "agentType": "multi-agent",
+      "date": "2026-06-02",
+      "logo": "/logos/miromind.png",
+      "scores": {
+        "public": {
+          "pass8": { "overall": 63.42, "sql2s": 53.20, "s2sql": 58.62, "parallel": 83.19 },
+          "avg8": { "overall": 32.76, "sql2s": 28.45, "s2sql": 22.20, "parallel": 45.27 }
+        }
+      }
+    },
+    {
+      "id": "miroflow-glm-52-fp4",
+      "system": "MiroFlow",
+      "org": "MiroMind",
+      "baseModel": "GLM-5.2-FP4",
+      "agentType": "multi-agent",
+      "date": "2026-06-02",
+      "logo": "/logos/miromind.png",
+      "scores": {
+        "public": {
+          "pass8": { "overall": 75.79, "sql2s": 69.46, "s2sql": 62.07, "parallel": 93.28 },
+          "avg8": { "overall": 49.24, "sql2s": 43.97, "s2sql": 38.15, "parallel": 63.66 }
+        }
+      }
+    }
+  ]
+}

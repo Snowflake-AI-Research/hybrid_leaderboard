@@ -1,0 +1,123 @@
+@import "tailwindcss";
+
+/* ============================================================
+   HybridDeepResearch — design tokens
+   Aligned to Snowflake brand palette:
+     Snowflake Blue #29B5E8 · Mid-Blue #11567F · Medium Gray #5B5B5B
+   Headings / primary buttons: Mid-Blue. Body / meta: gray.
+   Fills, bars, large accents: Snowflake Blue.
+   Type: headings = Manrope ExtraBold, body / subtitles / labels = Lato.
+   ============================================================ */
+@theme {
+  --color-base: #f6f9fc; /* page — cool snow white */
+  --color-surface: #ffffff; /* cards / panels */
+  --color-surface-2: #eef4fb; /* subtle fills */
+  --color-line: #e3ecf4; /* hairlines */
+  --color-line-2: #cfdcea; /* stronger borders */
+  --color-ink: #0f1c2b; /* headings / primary buttons — near-black ink (neutral, not an accent) */
+  --color-muted: #5b5b5b; /* body text — Snowflake Medium Gray */
+  --color-faint: #8c8c8c; /* labels, meta — light gray */
+
+  --color-ice: #11567f; /* accent for text / links — Mid-Blue (AA on white) */
+  --color-ice-bright: #29b5e8; /* Snowflake Blue — fills, bars, large accents */
+  --color-ice-deep: #11567f; /* Mid-Blue — hover / pressed / emphasis */
+  --color-frost: #e6f5fd; /* pale cool wash (tint of Snowflake Blue) */
+
+  --font-display: "Manrope", "Lato", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Lato", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: "Lato", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --radius: 16px;
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    font-optical-sizing: auto;
+  }
+  body {
+    background-color: var(--color-base);
+    color: #5b5b5b;
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.6;
+    letter-spacing: -0.006em;
+    font-weight: 400;
+    font-optical-sizing: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  }
+  h1,
+  h2,
+  h3 {
+    font-feature-settings: "kern" 1, "liga" 1, "ss01" 1;
+  }
+  ::selection {
+    background: color-mix(in srgb, var(--color-ice-bright) 26%, transparent);
+    color: var(--color-ink);
+  }
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-line-2) transparent;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    letter-spacing: -0.022em;
+    font-feature-settings: "kern" 1, "liga" 1, "ss01" 1;
+  }
+
+  /* fine engineering grid, very low contrast on white */
+  .bg-grid {
+    background-image: linear-gradient(
+        to right,
+        color-mix(in srgb, var(--color-ink) 5%, transparent) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        to bottom,
+        color-mix(in srgb, var(--color-ink) 5%, transparent) 1px,
+        transparent 1px
+      );
+    background-size: 60px 60px;
+  }
+
+  /* premium paper grain — barely-there */
+  .bg-grain {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* cool, layered card shadow — like light through ice */
+  .shadow-slab {
+    box-shadow: 0 1px 2px rgba(10, 26, 43, 0.04),
+      0 8px 24px -12px rgba(10, 60, 110, 0.18),
+      0 24px 60px -30px rgba(10, 60, 110, 0.22);
+  }
+  .shadow-lift {
+    box-shadow: 0 1px 2px rgba(10, 26, 43, 0.04),
+      0 12px 30px -18px rgba(10, 60, 110, 0.2);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+  .mask-fade-b {
+    mask-image: linear-gradient(to bottom, #000 60%, transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
