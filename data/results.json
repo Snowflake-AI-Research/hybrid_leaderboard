@@ -26,7 +26,7 @@
     "main": {
       "name": "HybridDeepResearch",
       "primaryMetric": "overall",
-      "columns": ["overall", "sql2s", "s2sql", "parallel"],
+      "columns": ["overall", "s2sql", "sql2s", "parallel"],
       "defaultSplit": "public",
       "defaultAgg": "avg",
       "defaultK": 8,

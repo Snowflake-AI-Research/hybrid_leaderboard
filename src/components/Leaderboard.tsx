@@ -84,11 +84,11 @@ function ScoreCell({ value, primary }: { value: number; primary?: boolean }) {
       </div>
       <span
         className={
-          "w-11 text-right font-mono tabular " +
+          "w-14 text-right font-mono tabular " +
           (primary ? "font-semibold text-ink" : "text-muted")
         }
       >
-        {value.toFixed(1)}
+        {value.toFixed(2)}
       </span>
     </div>
   );
