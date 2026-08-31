@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
-import { ArrowRight, ArrowUpRight, Database } from "@phosphor-icons/react";
+import { ArrowRight, ArrowUpRight, Database, GithubLogo } from "@phosphor-icons/react";
 import type { NewsItem } from "../lib/types";
 
 const EASE: [number, number, number, number] = [0.2, 0.8, 0.2, 1];
@@ -103,11 +103,24 @@ export default function Hero({
               </a>
             ) : null}
             <a
-              href="#dataset"
+              href="https://huggingface.co/datasets/Snowflake/HybridDeepResearch"
+              target="_blank"
+              rel="noopener"
               className="inline-flex items-center gap-1.5 rounded-full border border-line-2 bg-surface/80 px-5 py-3 text-[15px] font-medium text-ink backdrop-blur transition-colors hover:border-ice-bright hover:text-ice-deep"
             >
               <Database size={16} weight="bold" />
               Dataset
+              <ArrowUpRight size={16} />
+            </a>
+            <a
+              href="https://github.com/snowflake-eng/HybridDeepResearch/tree/main"
+              target="_blank"
+              rel="noopener"
+              className="inline-flex items-center gap-1.5 rounded-full border border-line-2 bg-surface/80 px-5 py-3 text-[15px] font-medium text-ink backdrop-blur transition-colors hover:border-ice-bright hover:text-ice-deep"
+            >
+              <GithubLogo size={16} weight="bold" />
+              Code
+              <ArrowUpRight size={16} />
             </a>
           </motion.div>
         </div>
@@ -196,7 +209,22 @@ function NewsCarousel({
                   {n.body}
                 </p>
               ) : null}
-              {n.link ? (
+              {n.links?.length ? (
+                <div className="mt-3.5 flex flex-wrap items-center gap-2">
+                  {n.links.map((l) => (
+                    <a
+                      key={l.url}
+                      href={l.url}
+                      target="_blank"
+                      rel="noopener"
+                      draggable={false}
+                      className="inline-flex items-center gap-1 rounded-full border border-line-2 bg-surface/80 px-3 py-1 text-[12px] font-medium text-ice-deep transition-colors hover:border-ice-bright"
+                    >
+                      {l.label} <ArrowUpRight size={13} />
+                    </a>
+                  ))}
+                </div>
+              ) : n.link ? (
                 <a
                   href={n.link}
                   target="_blank"

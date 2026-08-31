@@ -4,14 +4,14 @@ export type Scores = Record<ScoreKey, number>;
 
 export type AgentType = "multi-agent" | "single-agent";
 
-/** Reported metric: Pass@8 (solved if any of 8 runs is correct) vs Avg@8 (mean over 8 runs). */
-export type MetricKey = "pass8" | "avg8";
+/** Metric aggregation over k runs: Avg@k (mean over k runs) vs Pass@k (solved if any of k runs is correct). */
+export type MetricAgg = "avg" | "pass";
 
 /** Dataset split: the open public set vs the held-out private/official set. */
 export type SplitKey = "public" | "private";
 
-/** Both metrics' score sets for one split. */
-export type MetricScores = Record<MetricKey, Scores>;
+/** Aggregation (avg/pass) → k as a string key (e.g. "1", "8") → per-task scores. */
+export type MetricScores = Partial<Record<MetricAgg, Record<string, Scores>>>;
 
 /** Scores keyed by split. A split may be absent when its results aren't published yet. */
 export type SplitScores = Partial<Record<SplitKey, MetricScores>>;
@@ -35,6 +35,8 @@ export interface NewsItem {
   title: string;
   body?: string;
   link?: string;
+  /** Optional multiple labeled links, rendered as small pills. */
+  links?: { label: string; url: string }[];
 }
 
 export interface Meta {
@@ -52,8 +54,12 @@ export interface Board {
   columns: ScoreKey[];
   /** Split shown first. */
   defaultSplit?: SplitKey;
-  /** Metric shown first. */
-  defaultMetric?: MetricKey;
+  /** Aggregation shown first. */
+  defaultAgg?: MetricAgg;
+  /** k shown first. */
+  defaultK?: number;
+  /** k values offered in the toggle, e.g. [1, 8]. */
+  kValues?: number[];
 }
 
 export interface Data {
@@ -69,10 +75,15 @@ export const COLUMN_LABEL: Record<ScoreKey, string> = {
   parallel: "Parallel",
 };
 
-export const METRIC_LABEL: Record<MetricKey, string> = {
-  pass8: "Pass@8",
-  avg8: "Avg@8",
+export const AGG_LABEL: Record<MetricAgg, string> = {
+  avg: "Avg",
+  pass: "Pass",
 };
+
+/** Human label for a metric, e.g. metricLabel("avg", 8) === "Avg@8". */
+export function metricLabel(agg: MetricAgg, k: number): string {
+  return `${AGG_LABEL[agg]}@${k}`;
+}
 
 export const SPLIT_LABEL: Record<SplitKey, string> = {
   public: "Public",

@@ -7,13 +7,14 @@ import {
   MagnifyingGlass,
 } from "@phosphor-icons/react";
 import {
+  AGG_LABEL,
   COLUMN_LABEL,
-  METRIC_LABEL,
+  metricLabel,
   SPLIT_LABEL,
   type AgentType,
   type Board,
   type Entry,
-  type MetricKey,
+  type MetricAgg,
   type ScoreKey,
   type SplitKey,
 } from "../lib/types";
@@ -22,7 +23,7 @@ import OrgLogo from "./OrgLogo";
 const EASE: [number, number, number, number] = [0.2, 0.8, 0.2, 1];
 
 const SPLITS: SplitKey[] = ["public", "private"];
-const METRICS: MetricKey[] = ["avg8", "pass8"];
+const AGGS: MetricAgg[] = ["avg", "pass"];
 
 type AgentFilter = "all" | AgentType;
 const AGENT_FILTERS: { id: AgentFilter; label: string }[] = [
@@ -105,12 +106,16 @@ export default function Leaderboard({
   const [query, setQuery] = useState("");
   const [split, setSplit] = useState<SplitKey>(board.defaultSplit ?? "public");
   const [agent, setAgent] = useState<AgentFilter>("all");
-  const [metric, setMetric] = useState<MetricKey>(board.defaultMetric ?? "avg8");
+  const [agg, setAgg] = useState<MetricAgg>(board.defaultAgg ?? "avg");
+  const kValues = board.kValues ?? [8];
+  const [k, setK] = useState<number>(board.defaultK ?? kValues[0] ?? 8);
+
+  const kKey = String(k);
 
   const rows = useMemo(() => {
     const q = query.trim().toLowerCase();
     return entries
-      .filter((e) => e.scores[split]?.[metric])
+      .filter((e) => e.scores[split]?.[agg]?.[kKey])
       .filter((e) => agent === "all" || e.agentType === agent)
       .filter(
         (e) =>
@@ -118,11 +123,16 @@ export default function Leaderboard({
           `${e.system} ${e.org} ${e.baseModel}`.toLowerCase().includes(q)
       )
       .sort((a, b) => {
-        const av = a.scores[split]![metric][sortKey];
-        const bv = b.scores[split]![metric][sortKey];
+        const av = a.scores[split]![agg]![kKey][sortKey];
+        const bv = b.scores[split]![agg]![kKey][sortKey];
         return (av - bv) * sortDir;
       });
-  }, [entries, query, split, agent, metric, sortKey, sortDir]);
+  }, [entries, query, split, agent, agg, kKey, sortKey, sortDir]);
+
+  const hasComboData = useMemo(
+    () => entries.some((e) => e.scores[split]?.[agg]?.[kKey]),
+    [entries, split, agg, kKey]
+  );
 
   function toggleSort(k: ScoreKey) {
     if (k === sortKey) setSortDir((d) => (d === -1 ? 1 : -1));
@@ -153,9 +163,15 @@ export default function Leaderboard({
           />
           <Segmented
             label="Metric"
-            value={metric}
-            onChange={setMetric}
-            options={METRICS.map((m) => ({ id: m, label: METRIC_LABEL[m] }))}
+            value={agg}
+            onChange={setAgg}
+            options={AGGS.map((a) => ({ id: a, label: AGG_LABEL[a] }))}
+          />
+          <Segmented
+            label="k"
+            value={kKey}
+            onChange={(v) => setK(Number(v))}
+            options={kValues.map((kv) => ({ id: String(kv), label: `@${kv}` }))}
           />
         </div>
         <div className="relative">
@@ -231,6 +247,14 @@ export default function Leaderboard({
                       The private split is held out and scored by the organizers —
                       check back after the next evaluation round.
                     </>
+                  ) : !hasComboData ? (
+                    <>
+                      <span className="font-semibold text-ink">
+                        {metricLabel(agg, k)} results are not published yet.
+                      </span>
+                      <br />
+                      Switch k back to 8 to see the reported scores.
+                    </>
                   ) : (
                     "No systems match your search."
                   )}
@@ -238,7 +262,7 @@ export default function Leaderboard({
               </tr>
             ) : (
               rows.map((e, i) => {
-                const s = e.scores[split]![metric];
+                const s = e.scores[split]![agg]![kKey];
                 return (
                   <motion.tr
                     key={e.id}
@@ -317,7 +341,7 @@ export default function Leaderboard({
 
       <p className="mt-3.5 font-mono text-[12px] text-faint">
         {rows.length} system{rows.length === 1 ? "" : "s"} · {SPLIT_LABEL[split]}{" "}
-        split · {METRIC_LABEL[metric]}
+        split · {metricLabel(agg, k)}
         {agent !== "all" ? ` · ${agent}` : ""}
       </p>
     </div>

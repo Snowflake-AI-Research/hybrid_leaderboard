@@ -54,7 +54,7 @@ export default function App() {
           <SectionHead
             kicker="Leaderboard"
             title="Leaderboard"
-            sub="Open-model baselines under two agent scaffolds (smolagents and MiroFlow). Toggle between the public and private splits and between Avg@8 and Pass@8; scores break down across the 3 task categories: SQL2S, S2SQL and Parallel."
+            sub="Open-model baselines under two agent scaffolds (smolagents and MiroFlow). Toggle the split, the metric (Avg / Pass), and k; scores break down across the 3 task categories: SQL2S, S2SQL and Parallel."
           />
           <Leaderboard entries={data.entries} board={data.boards.main} />
         </Section>
