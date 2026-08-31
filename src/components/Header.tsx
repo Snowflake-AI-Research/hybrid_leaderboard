@@ -3,7 +3,8 @@ import { asset } from "../lib/asset";
 const NAV = [
   { href: "#leaderboard", label: "Leaderboard" },
   { href: "#dataset", label: "Dataset" },
-  { href: "#submit", label: "Submit" },
+  // Submit temporarily hidden for this release.
+  // { href: "#submit", label: "Submit" },
 ];
 
 export default function Header() {
@@ -34,12 +35,14 @@ export default function Header() {
             </a>
           ))}
         </nav>
+        {/* "Submit a result" button temporarily hidden for this release.
         <a
           href="#submit"
           className="ml-auto rounded-full bg-ink px-4 py-2 text-[13.5px] font-semibold text-white transition-colors hover:bg-ice-deep md:ml-2"
         >
           Submit a result
         </a>
+        */}
       </div>
     </header>
   );

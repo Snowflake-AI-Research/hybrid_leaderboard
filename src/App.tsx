@@ -6,8 +6,9 @@ import Hero from "./components/Hero";
 import Leaderboard from "./components/Leaderboard";
 import DatasetDesign from "./components/DatasetDesign";
 import DatasetSummary from "./components/DatasetSummary";
-import Submit from "./components/Submit";
-import Subscribe from "./components/Subscribe";
+// Submit / Subscribe temporarily hidden for this release.
+// import Submit from "./components/Submit";
+// import Subscribe from "./components/Subscribe";
 import { Kicker, Section } from "./components/primitives";
 
 const data = rawData as unknown as Data;
@@ -75,12 +76,14 @@ export default function App() {
           </div>
         </Section>
 
+        {/* Submit / Subscribe temporarily hidden for this release.
         <Section id="submit">
           <SectionHead kicker="Submit" title="Add your system" />
           <Submit />
         </Section>
 
         <Subscribe />
+        */}
       </main>
       <Footer sample={data.meta.isSampleData} />
     </div>
