@@ -113,7 +113,7 @@ export default function Hero({
               <ArrowUpRight size={16} />
             </a>
             <a
-              href="https://github.com/snowflake-eng/HybridDeepResearch/tree/main"
+              href="https://github.com/Snowflake-AI-Research/HybridDeepResearch"
               target="_blank"
               rel="noopener"
               className="inline-flex items-center gap-1.5 rounded-full border border-line-2 bg-surface/80 px-5 py-3 text-[15px] font-medium text-ink backdrop-blur transition-colors hover:border-ice-bright hover:text-ice-deep"

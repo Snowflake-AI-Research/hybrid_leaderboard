@@ -6,11 +6,19 @@
     "isSampleData": false,
     "news": [
       {
+        "date": "2026-09-08",
+        "title": "Paper is now available on arxiv",
+        "body": "Our paper Benchmarking Hybrid Deep Research Across Database Querying and Web Search is now available on arxiv",
+        "links": [
+          { "label": "Paper", "url": "https://arxiv.org/abs/2609.09410" }
+        ]
+      },
+      {
         "date": "2026-08-31",
         "title": "Code and dataset now available",
         "body": "We've released the HybridDeepResearch code and dataset. Get the example code on GitHub and the tasks on Hugging Face.",
         "links": [
-          { "label": "Code", "url": "https://github.com/snowflake-eng/HybridDeepResearch/tree/main" },
+          { "label": "Code", "url": "https://github.com/Snowflake-AI-Research/HybridDeepResearch" },
           { "label": "Dataset", "url": "https://huggingface.co/datasets/Snowflake/HybridDeepResearch" }
         ]
       },
